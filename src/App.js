@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Input, InputGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from "reactstrap";
-
+import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from "reactstrap";
 
 class App extends Component {
   state = {
-    books: []
+    books: [],
+    newBookData: {
+      title: "",
+      rating: ""
+    }
   }
   componentWillMount() {
     axios.get("http://localhost3000/books").then((response) => {
@@ -17,8 +20,13 @@ class App extends Component {
   }
   toggleNewBookModal () {
     this.setState({
-      newBookModal: true
+      newBookModal: ! this.state.newBookModal
     })
+  }
+  addBook() {
+    axios.post("http://localhost:3000/books", this.state.newBookData).then((response) => {
+      console.log(response.data);
+    });
   }
 render() {
   let books = this.state.books.map((book) => {
@@ -41,16 +49,35 @@ render() {
           <Modal isOpen={this.state.newBookModal} toggle={this.toggleNewBookModal.bind(this)}>
             <ModalHeader toggle={this.toggleNewBookModal.bind(this)}>Add a new book</ModalHeader>
             <ModalBody>
-              <InputGroup>
+              <FormGroup>
                 <Label for="title">Title</Label>
-                <Input id="title"></Input>
-              </InputGroup>
+                <Input id="title" value={this.state.newBookData.title} onChange={(e) => {
+                  let { newBookData } = this.state;
+
+                  newBookData.title = e.target.value;
+                  
+                  this.setState({ newBookData });
+                }} />
+              </FormGroup>
+              <FormGroup>
+                <Label for="rating">Rating</Label>
+                <Input id="rating" value={this.state.newBookData.rating} onChange={(e) => {
+                  let { newBookData } = this.state;
+
+                  newBookData.rating = e.target.value;
+                  
+                  this.setState({ newBookData });
+
+                }} />
+              </FormGroup>
+
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.toggleNewBookModal.bind(this)}>Add a new book</Button>{' '}
+              <Button color="primary" onClick={this.addBook.bind(this)}>Add a new book</Button>{' '}
               <Button color="secondary" onClick={this.toggleNewBookModal.bind(this)}>Cancel</Button>
             </ModalFooter>
           </Modal>
+
       <Table>
         <thead>
           <tr>
