@@ -2,18 +2,8 @@
   "books": [
     {
       "title": "Harry Potter",
-      "rating": "12",
-      "id": "1"
-    },
-    {
-      "title": "Avatar",
-      "rating": "2",
-      "id": "vrL1qDK"
-    },
-    {
-      "title": "Lord of the rings",
       "rating": "10",
-      "id": "FQ38zkp"
+      "id": "1"
     }
   ]
 }
