@@ -1,9 +1,19 @@
 {
   "books": [
     {
-      "id": "1",
+      "title": "Harry Potter",
+      "rating": "12",
+      "id": "1"
+    },
+    {
       "title": "Avatar",
-      "rating": 4.5
+      "rating": "2",
+      "id": "vrL1qDK"
+    },
+    {
+      "title": "Lord of the rings",
+      "rating": "10",
+      "id": "FQ38zkp"
     }
   ]
 }
